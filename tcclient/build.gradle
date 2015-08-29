@@ -1,0 +1,43 @@
+apply plugin: "war"
+apply plugin: "jacoco"
+apply plugin: "findbugs"
+apply plugin: "pmd"
+apply plugin: 'checkstyle'
+
+ext {
+    springVersion = "4.1.6.RELEASE"
+    jacksonVersion = "2.2.3"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+//findbugs {
+//    ignoreFailures = true
+//}
+//
+//pmd {
+//    ignoreFailures = true
+//}
+//
+//checkstyle {
+//    ignoreFailures = true
+//}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-web:$springVersion"
+    compile "javax.servlet:javax.servlet-api:3.0.1"
+    compile "org.springframework:spring-webmvc:$springVersion"
+}

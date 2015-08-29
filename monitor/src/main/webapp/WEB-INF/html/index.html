@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" ng-app-root="/fsfs">
+<head>
+    <meta charset="UTF-8"/>
+    <!-- Chrome, Safari, IE -->
+    <link rel="shortcut icon" href="/provisioning/resources/app/assets/img/favicon.ico"/>
+    <!-- Firefox, Opera -->
+    <link rel="icon" href="/provisioning/resources/app/assets/img/favicon.ico" type="image/x-icon" />
+    <title>CWS Instant Evaluation Provisioning</title>
+    <link rel="stylesheet" th:href="@{/resources/app/assets/css/font-awesome.min.css(v=${version})}"/>
+    <link rel="stylesheet" th:href="@{/resources/app/assets/css/general.css(v=${version})}"/>
+	<!--[if lt IE 9]>
+	   <script>
+		  document.createElement('header');
+		  document.createElement('nav');
+		  document.createElement('section');
+		  document.createElement('article');
+		  document.createElement('aside');
+		  document.createElement('footer');
+	   </script>
+    <![endif]-->
+</head>
+<body>
+<div id="frame">
+    <h1>Hello</h1>
+</div>
+</body>
+
+<script type="text/javascript" th:attr="data-main=@{/resources/app/main.js}" th:src="@{/resources/app/assets/libs/require.js}"></script>
+</html>
+

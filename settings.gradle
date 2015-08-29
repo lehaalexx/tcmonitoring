@@ -1,0 +1,6 @@
+rootProject.name = 'TCMonitor'
+include ':tcclient'
+include ':monitor'
+
+project(':tcclient').projectDir = "$rootDir/tcclient" as File
+project(':monitor').projectDir = "$rootDir/monitor" as File
