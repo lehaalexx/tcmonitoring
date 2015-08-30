@@ -1,6 +1,8 @@
 rootProject.name = 'TCMonitor'
+include ':models'
 include ':tcclient'
 include ':monitor'
 
+project(':models').projectDir = "$rootDir/models" as File
 project(':tcclient').projectDir = "$rootDir/tcclient" as File
 project(':monitor').projectDir = "$rootDir/monitor" as File

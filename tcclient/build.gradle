@@ -36,8 +36,13 @@ repositories {
 }
 
 dependencies {
+    compile project(":models")
     compile "org.springframework:spring-core:$springVersion"
     compile "org.springframework:spring-web:$springVersion"
     compile "javax.servlet:javax.servlet-api:3.0.1"
     compile "org.springframework:spring-webmvc:$springVersion"
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.amazonaws:aws-java-sdk-s3:1.10.14"
+    compile "com.amazonaws:aws-java-sdk-core:1.10.14"
 }

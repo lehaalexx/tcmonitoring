@@ -25,7 +25,7 @@ import java.util.Locale;
 @EnableWebMvc
 @EnableSwagger2
 @EnableScheduling
-@PropertySource("classpath:properties/urlMapping.properties")
+@PropertySource({"classpath:properties/urlMapping.properties", "classpath:properties/server.properties"})
 @ComponentScan(basePackages = {"com.tcmonitor.server"})
 @Import({SecurityConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {

@@ -1,2 +1,4 @@
 rootProject.name = 'tcclient'
+include ':models'
 
+project(':models').projectDir = "$rootDir/../models" as File

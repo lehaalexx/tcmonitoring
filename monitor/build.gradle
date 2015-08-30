@@ -53,6 +53,7 @@ jslint {
 }
 
 dependencies {
+    compile project(":models")
     compile "org.springframework:spring-core:$springVersion"
     compile "org.springframework:spring-web:$springVersion"
     compile "org.springframework:spring-webmvc:$springVersion"
@@ -62,6 +63,8 @@ dependencies {
     compile "org.springframework.security:spring-security-config:$springSecurityVersion"
     compile "org.springframework.security.oauth:spring-security-oauth2:2.0.3.RELEASE"
     compile "org.springframework.security.extensions:spring-security-saml2-core:1.0.1.RELEASE"
+    compile "com.amazonaws:aws-java-sdk-s3:1.10.14"
+    compile "com.amazonaws:aws-java-sdk-core:1.10.14"
     compile "io.springfox:springfox-swagger2:$swagger"
     compile "io.springfox:springfox-swagger-ui:$swagger"
     compile "org.thymeleaf:thymeleaf:$thymeleaf"
