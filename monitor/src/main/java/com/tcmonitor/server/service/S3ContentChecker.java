@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.tcmonitor.model.Health;
 import com.tcmonitor.model.Logs;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.List;
 public class S3ContentChecker {
 
     private static final String FILE_NAME = "tcmonitor";
+    private static final String HEALTH_NAME = "healthtcmonitor";
 
     @Value("${tcmonitor.aws.key}")
     private String accessKeyId;
@@ -48,19 +50,29 @@ public class S3ContentChecker {
     //Check logs every 5 seconds
     @Scheduled(cron = "*/5 * * * * *")
     public void check() {
-        List<String> logs = getListForBucket();
+        List<String> logs = getListForBucket(FILE_NAME);
         for(String log : logs){
             Logs s3Log = (Logs)get(Logs.class, log);
             logProcessor.processLogs(s3Log);
             delete(log);
         }
-
     }
 
-    public List<String> getListForBucket() {
+    //Check health every 20 seconds
+    @Scheduled(cron = "*/20 * * * * *")
+    public void health() {
+        List<String> health = getListForBucket(HEALTH_NAME);
+        for(String heal : health){
+            Health health1 = (Health)get(Health.class, heal);
+            logProcessor.processHealth(health1);
+            delete(heal);
+        }
+    }
+
+    public List<String> getListForBucket(String prefix) {
         List<String> list = new ArrayList<>();
         ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucket);
-        listObjectsRequest.withPrefix(FILE_NAME);
+        listObjectsRequest.withPrefix(prefix);
         ObjectListing objectListing = s3Client.listObjects(listObjectsRequest);
         for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
             String key = objectSummary.getKey();

@@ -1,6 +1,7 @@
 package com.tcmonitor.client.service.sender;
 
 import com.tcmonitor.client.service.LogsPopulation;
+import com.tcmonitor.model.Health;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -17,6 +18,9 @@ public class RestMessageSender implements MessageSender{
     @Value("${rest.log.url}")
     private String restLogUrl;
 
+    @Value("${rest.health.url}")
+    private String restHealthUrl;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -27,5 +31,11 @@ public class RestMessageSender implements MessageSender{
     public void send(String message, String fileName) {
         restTemplate.exchange(endpoint + restLogUrl, HttpMethod.POST,
                 new HttpEntity(logsPopulation.populate(message, fileName)), String.class);
+    }
+
+    @Override
+    public void healthSend(Health health) {
+        restTemplate.exchange(endpoint + restHealthUrl, HttpMethod.POST,
+                new HttpEntity(health), String.class);
     }
 }

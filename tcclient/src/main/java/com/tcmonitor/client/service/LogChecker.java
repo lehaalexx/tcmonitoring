@@ -32,6 +32,9 @@ public class LogChecker {
     @Autowired
     private S3MessageSender s3MessageSender;
 
+    @Autowired
+    private HealthService healthService;
+
     @PostConstruct
     public void init(){
         tcLogsDir = getTCPath();
@@ -46,6 +49,12 @@ public class LogChecker {
     @Scheduled(cron = "*/5 * * * * *")
     public void check() {
         getListOfFiles();
+    }
+
+    //Send health every 20 seconds
+    @Scheduled(cron = "*/20 * * * * *")
+    public void health() {
+        sender.healthSend(healthService.getHealth());
     }
 
     private static String parseTCPath(String path){
