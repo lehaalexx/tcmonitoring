@@ -50,22 +50,26 @@ public class S3ContentChecker {
     //Check logs every 5 seconds
     @Scheduled(cron = "*/5 * * * * *")
     public void check() {
-        List<String> logs = getListForBucket(FILE_NAME);
-        for(String log : logs){
-            Logs s3Log = (Logs)get(Logs.class, log);
-            logProcessor.processLogs(s3Log);
-            delete(log);
+        if(!bucket.isEmpty() && !accessKeyId.isEmpty() && !secretKey.isEmpty()) {
+            List<String> logs = getListForBucket(FILE_NAME);
+            for (String log : logs) {
+                Logs s3Log = (Logs) get(Logs.class, log);
+                logProcessor.processLogs(s3Log);
+                delete(log);
+            }
         }
     }
 
     //Check health every 20 seconds
     @Scheduled(cron = "*/20 * * * * *")
     public void health() {
-        List<String> health = getListForBucket(HEALTH_NAME);
-        for(String heal : health){
-            Health health1 = (Health)get(Health.class, heal);
-            logProcessor.processHealth(health1);
-            delete(heal);
+        if(!bucket.isEmpty() && !accessKeyId.isEmpty() && !secretKey.isEmpty()) {
+            List<String> health = getListForBucket(HEALTH_NAME);
+            for (String heal : health) {
+                Health health1 = (Health) get(Health.class, heal);
+                logProcessor.processHealth(health1);
+                delete(heal);
+            }
         }
     }
 

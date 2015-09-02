@@ -42,9 +42,9 @@ public class S3MessageSender implements MessageSender {
     }
 
     @Override
-    public void send(String message, String fileName) {
+    public void send(String message, String fileName, String scope) {
         try {
-            saveMapper(logsPopulation.populate(message, fileName), FILE_NAME + System.currentTimeMillis());
+            saveMapper(logsPopulation.populate(message, fileName, scope), FILE_NAME + System.currentTimeMillis());
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

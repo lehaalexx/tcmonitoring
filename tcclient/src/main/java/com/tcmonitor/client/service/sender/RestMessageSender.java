@@ -28,9 +28,9 @@ public class RestMessageSender implements MessageSender{
     private LogsPopulation logsPopulation;
 
     @Override
-    public void send(String message, String fileName) {
+    public void send(String message, String fileName, String scope) {
         restTemplate.exchange(endpoint + restLogUrl, HttpMethod.POST,
-                new HttpEntity(logsPopulation.populate(message, fileName)), String.class);
+                new HttpEntity(logsPopulation.populate(message, fileName, scope)), String.class);
     }
 
     @Override

@@ -10,11 +10,12 @@ public class LogsPopulation {
     @Value("${tcmonitor.vm.name}")
     private String vmTag;
 
-    public Logs populate(String message, String fileName){
+    public Logs populate(String message, String fileName, String scope){
         Logs logs = new Logs();
         logs.setLogMessage(message);
         logs.setVmTag(vmTag);
         logs.setFileName(fileName);
+        logs.setScope(scope);
         return logs;
     }
 }

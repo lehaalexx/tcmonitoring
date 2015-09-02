@@ -15,7 +15,8 @@ import java.util.Map;
 
 @Service
 public class LogChecker {
-
+    private static final String FULL_SCOPE = "full";
+    private static final String PART_SCOPE = "part";
     private String tcLogsDir;
     private Map<String, Long> files = new HashMap();
     private MessageSender sender;
@@ -112,12 +113,13 @@ public class LogChecker {
         } catch (IOException e) {
             throw new RuntimeException("Log read exception", e);
         }
-        sender.send(fullLog.toString(), file.getName());
+        sender.send(fullLog.toString(), file.getName(), FULL_SCOPE);
     }
 
     private void reversOrderReadLog(File file){
         StringBuilder fullLog = new StringBuilder();
         String sCurrentLine;
+        String prefix = "";
         try {
             RandomAccessFile rFile = new RandomAccessFile(file, "r");
             rFile.seek(files.get(file.getName()));
@@ -125,7 +127,9 @@ public class LogChecker {
                 if(sCurrentLine.isEmpty()){
                     continue;
                 }
-                fullLog.append(sCurrentLine).append("\n");
+                fullLog.append(prefix);
+                prefix = "\n";
+                fullLog.append(sCurrentLine);
             }
             rFile.close();
         } catch (FileNotFoundException e) {
@@ -133,7 +137,7 @@ public class LogChecker {
         } catch (IOException e) {
             throw new RuntimeException("Log read exception", e);
         }
-        sender.send(fullLog.toString(), file.getName());
+        sender.send(fullLog.toString(), file.getName(), PART_SCOPE);
     }
 
 }

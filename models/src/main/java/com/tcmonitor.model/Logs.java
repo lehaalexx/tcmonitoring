@@ -4,6 +4,7 @@ public class Logs {
     private String logMessage;
     private String fileName;
     private String vmTag;
+    private String scope;
 
     public String getLogMessage() {
         return logMessage;
@@ -27,5 +28,13 @@ public class Logs {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 }
