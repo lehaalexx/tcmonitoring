@@ -1,8 +1,8 @@
 /* global declarations for jslint*/
 /*global document*/
 require.config({
-  baseUrl: NETSUITE_CONFIG.context + '/resources/app/',
-    urlArgs: NETSUITE_CONFIG.version,
+  baseUrl: MONITOR_CONFIG.context + '/resources/app/',
+    urlArgs: MONITOR_CONFIG.version,
   paths: {
     'jQuery': 'assets/libs/jquery.min',
     'underscore': 'assets/libs/underscore',
@@ -22,6 +22,6 @@ var deps = ['jQuery', 'angular', 'app', 'appRoutes'];
 require(deps, function ($, angular) {
   "use strict";
   $(function () { // using jQuery because it will run this even if DOM load already happened
-      angular.bootstrap(document, ['netSuiteApp']);
+      angular.bootstrap(document, ['tcMonitorApp']);
   });
 });

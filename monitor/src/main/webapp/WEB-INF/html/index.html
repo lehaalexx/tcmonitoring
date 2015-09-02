@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="/provisioning/resources/app/assets/img/favicon.ico"/>
     <!-- Firefox, Opera -->
     <link rel="icon" href="/provisioning/resources/app/assets/img/favicon.ico" type="image/x-icon" />
-    <title>CWS Instant Evaluation Provisioning</title>
+    <title>Tomcat Monitor Server</title>
     <link rel="stylesheet" th:href="@{/resources/app/assets/css/font-awesome.min.css(v=${version})}"/>
     <link rel="stylesheet" th:href="@{/resources/app/assets/css/general.css(v=${version})}"/>
 	<!--[if lt IE 9]>
@@ -22,10 +22,17 @@
 </head>
 <body>
 <div id="frame">
-    <h1>Hello</h1>
+    <span id="ng-view" ng-view="tcMonitor"></span>
 </div>
 </body>
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var MONITOR_CONFIG = MONITOR_CONFIG || {};
+    MONITOR_CONFIG.localization = /*[[${localization}]]*/[];
+    MONITOR_CONFIG.version = /*[[${version}]]*/[];
+    MONITOR_CONFIG.context = /*[[${context}]]*/[];
+    /*]]>*/
+</script>
 <script type="text/javascript" th:attr="data-main=@{/resources/app/main.js}" th:src="@{/resources/app/assets/libs/require.js}"></script>
 </html>
 

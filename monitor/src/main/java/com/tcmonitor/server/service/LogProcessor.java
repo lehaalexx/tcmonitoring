@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -116,11 +115,12 @@ public class LogProcessor {
         System.out.println("END-----------------------");
     }
 
-    private void checkOrCreateVmFolder(String vmTag){
+    private boolean checkOrCreateVmFolder(String vmTag){
         File vmFolder = new File(logPathStorage + "/" + vmTag);
         if(!vmFolder.exists()){
-            vmFolder.mkdir();
+            return vmFolder.mkdir();
         }
+        return false;
     }
 
     private void writeFullFile(Logs log){

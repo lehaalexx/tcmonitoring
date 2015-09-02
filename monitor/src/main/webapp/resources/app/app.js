@@ -1,16 +1,16 @@
 /* global declarations for jslint*/
-/*global NETSUITE_CONFIG*/
+/*global MONITOR_CONFIG*/
 define([
     'angular',
     'underscore',
     'angular-route'
 ], function (angular, _) {
     "use strict";
-    var app = angular.module('netSuiteApp', [
+    var app = angular.module('tcMonitorApp', [
         'ngRoute'
     ]);
     app.config(function ($httpProvider) {
-        $httpProvider.defaults.headers.post[NETSUITE_CONFIG.csrfHeader] = NETSUITE_CONFIG.csrf;
+        $httpProvider.defaults.headers.post[MONITOR_CONFIG.csrfHeader] = MONITOR_CONFIG.csrf;
     });
     return app;
 });
